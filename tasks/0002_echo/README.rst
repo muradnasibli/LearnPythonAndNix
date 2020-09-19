@@ -14,7 +14,7 @@ Unix echo
   $ echo This works!
   This works!
 
-Echo is frequently used in scripts, batch files, and as part of individual commands; anywhere you may need to insert text. Many command shells such as bash, ksh and csh implement echo as a built-in command [1]_.
+Echo is frequently used in scripts, batch files, and as part of individual commands; anywhere you may need to insert text. Many command shells such as bash, ksh and csh implement echo as a built-in command. [1]_
 
 Command-line arguments
 ......................
@@ -27,7 +27,7 @@ When a command processor is active a program is typically invoked by typing its 
 
   $ rm file.s
 
-``"file.s"`` is a command-line argument which tells the program ``rm`` to remove the file ``"file.s"``.
+``"file.s"`` is a command-line argument which tells the program ``rm`` to remove the file ``"file.s"``. [2]_
 
 
 Task

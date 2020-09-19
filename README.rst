@@ -28,4 +28,4 @@ Essential documentation
 =======================
 
 * `Official Python docs <https://docs.python.org/3/index.html>`_
-* `Syncing a forks <https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork>`_
+* `Syncing a fork <https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork>`_
