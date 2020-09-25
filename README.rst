@@ -15,8 +15,8 @@ environment.
    ``README.rst`` with instructions and background info.
 4. Commit to your repository and ping me to review it :)
 5. More tasks will be appearing in the original repository.
-   Remember to sync your fork with the original repository at least
-   once a week.
+   See CHANGELOG.rst for updates.
+
 
 Requirements
 ============
