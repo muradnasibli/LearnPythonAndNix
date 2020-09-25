@@ -39,8 +39,8 @@ Python ecosystem has an army of tools to detect formatting
 errors and re-format existing code.
 My favourites are:
 
-* `*flake8* <https://flake8.pycqa.org/en/latest/>`_ - a tool for style guide enforcement.
-* `*black* <https://github.com/psf/black>`_ - the uncompromising Python code formatter.
+* `flake8 <https://flake8.pycqa.org/en/latest/>`_ - a tool for style guide enforcement.
+* `black <https://github.com/psf/black>`_ - the uncompromising Python code formatter.
 
 
 Task
