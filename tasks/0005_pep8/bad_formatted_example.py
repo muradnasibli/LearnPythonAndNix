@@ -1,5 +1,6 @@
-def CalculateVelocity(deltaX, t):
-    velocity = deltaX/t
+def calculatevelocity(deltax, t):
+    velocity = deltax / t
     return velocity
 
-print(CalculateVelocity(10, 3))
+
+print(calculatevelocity(10, 3))
