@@ -2,85 +2,57 @@
 import sys
 
 
-# [-c], [-n] options working with this method
-def text_in_file(text, filename):
-    line_number = 0
-    list_of_results = []
-    with open(filename, "r") as read_file:
-        # Read all lines in the file one by one
-        for line in read_file:
-            line_number += 1
-            if text in line:
-                # Add the line number & line as a tuple in the list
-                list_of_results.append((line_number, line.rstrip()))
-    return list_of_results
-
-
-# [-i] ignore pattern case option method
-def ignore_pattern_case(text, filename):
-    line_number = 0
-    list_of_results = []
-    with open(filename, "r") as read_file:
-        # Read all lines in the file one by one
-        for line in read_file:
-            line_number += 1
-            if text.lower() in line.lower():
-                # Add the line number & line as a tuple in the list
-                list_of_results.append((line_number, line.rstrip()))
-    return list_of_results
-
-
-# [-v] option working with this
-def text_not_in_file(text, filename):
-    line_number = 0
-    list_of_results = []
-    with open(filename, "r") as read_file:
-        # Read all lines in the file one by one
-        for line in read_file:
-            line_number += 1
-            if text not in line:
-                # Add the line number & line as a tuple in the list
-                list_of_results.append((line_number, line.rstrip()))
-    return list_of_results
+class Options:
+    def __init__(self, args):
+        self.ignore_case = "-i" in args
+        self.show_count = "-c" in args
+        self.show_line_number = "-n" in args
+        self.invert_search = "-v" in args
 
 
 def main():
-    # my list with given options
-    mylist = ["-i", "-n", "-v", "-c"]
+    options = Options(sys.argv)
 
-    # [project name]  -[option] [text] [filename]
-    # grep1.py -i info README.rst
+    if len(sys.argv) < 3:
+        print(f"Usage: python {sys.argv[0]} [OPTION] text filename")
+        exit(0)
 
-    option = sys.argv[1]
-    text = sys.argv[2]
-    filename = sys.argv[3]
+    filename = sys.argv[-1]
+    text = sys.argv[-2]
 
-    for arg in sys.argv[1:2]:
-        # Check does given option in list or not
-        if mylist.__contains__(arg):
-            for opt in mylist:
-                # Check my first index of argument equals to
-                if option == opt:
-                    if opt == "-i":
-                        matched = ignore_pattern_case(text, filename)
-                        for elem in matched:
-                            print(str(elem[1]))
-                    elif opt == "-c":
-                        matched = text_in_file(text, filename)
-                        print(len(matched))
-                    elif opt == "-n":
-                        matched = text_in_file(text, filename)
-                        for elem in matched:
-                            print(str(elem[0]) + ": ", str(elem[1]))
-                    elif opt == "-v":
-                        matched = text_not_in_file(text, filename)
-                        for elem in matched:
-                            print(str(elem[1]))
-                    else:
-                        print("Patterns are not found!")
+    count = 0
+
+    with open(filename, "r") as f:
+        for line_number, line in enumerate(f, start=1):
+            if options.show_count:
+                if text in line:
+                    count += 1
+                    continue
+
+            grep_result = do_line_grep(text, line, options, line_number)
+
+            if grep_result is not None:
+                print(grep_result)
+
+        if options.show_count:
+            print(count)
+
+
+def do_line_grep(text, line, options, line_number):
+    match = False
+
+    if options.ignore_case:
+        match = text.lower() in line.lower()
+    elif options.invert_search:
+        match = text not in line
+    else:
+        match = text in line
+
+    if match:
+        if options.show_line_number:
+            return f"{line_number}: {line.rstrip()}"  # string interpolation instead of str(...) + '...' + str(...)
         else:
-            print("This options not found in [mylist]")
+            return line.rstrip()
 
 
-if __name__ == "__main__":
-    main()
+main()
